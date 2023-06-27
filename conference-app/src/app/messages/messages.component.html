@@ -1,5 +1,5 @@
 <p *ngFor="let message of messageService.messages">
-  <ngb-alert [type]="message.type" (close)="closeMessage(message.id)">
+  <ngb-alert [type]="message.type" (closed)="closeMessage(message.id)">
     {{message.contents}}
   </ngb-alert>
 </p>
