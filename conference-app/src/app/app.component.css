@@ -1,0 +1,16 @@
+label {
+  margin-bottom: 10px;
+  display: block;
+}
+
+.navbar {
+  min-height: 115px;
+}
+
+.micro-logo {
+  background-image: url("../assets/images/micro-logo-bl.png");
+  width: 7rem;
+  height: 4.5rem;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

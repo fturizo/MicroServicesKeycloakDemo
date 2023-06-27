@@ -1,0 +1,63 @@
+<div class="container">
+  <p>
+    <!--Disable button if already registered-->
+    <button class="btn btn-primary" (click)="openRegisterSpeaker(speakerDialog)"
+            [disabled]="isUserRegistered">
+      Register Myself as Speaker <i class="fa fa-plus-circle"></i>
+    </button>
+  </p>
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Organization</th>
+      <th scope="col">Status</th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let speaker of speakers">
+        <th scope="row">{{speaker.id}}</th>
+        <td><i class="fa fa-user-tie"></i>{{speaker.name}}</td>
+        <td>{{speaker.organization}}</td>
+        <td>
+          <span class="badge text-bg-success" *ngIf="speaker.accepted">
+            <i class="fa fa-check-double"></i>Accepted!
+          </span>
+          <span class="badge text-bg-secondary" *ngIf="!speaker.accepted">
+            <i class="fa fa-question"></i>Still Pending
+          </span>
+        </td>
+        <td>
+          <button class="btn btn-primary" (click)="acceptSpeaker(speaker)" [disabled]="speaker.accepted"
+                  ngbTooltip="Accept Speaker">
+            <i class="fa fa-user-check"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<ng-template #speakerDialog let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Register Yourself as Speaker</h5>
+    <button type="button" class="btn-close" aria-label="Close" (click)="currentModal.dismiss()"></button>
+  </div>
+  <form [formGroup]="registerForm" (submit)="registerSpeaker(registerForm.value)">
+    <div class="modal-body">
+        <div class="form-group">
+          <label for="speakerName">Name</label>
+          <input id="speakerName" type="text" class="form-control" formControlName="name" disabled="true">
+        </div>
+        <div class="form-group">
+          <label for="speakerOrg">Organization</label>
+          <input id="speakerOrg" type="text" class="form-control" placeholder="Enter Organization's Name" formControlName="organization">
+        </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="currentModal.dismiss()">Close</button>
+      <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+  </form>
+</ng-template>

@@ -1,0 +1,52 @@
+= Conference Application Demo
+
+This is a small application demo used to showcase integration with a separate Keycloak service to secure a microservices architecture provisioned using the Eclipse MicroProfile framework.
+
+This application domain is to manage the speakers and session talks for a conference event.
+
+IMPORTANT: The Keycloak realm used by this application should have a client named `conference-web`. This demo assumes that this client is deployed (along with the Keycloak realm) in `http://localhost:8888/`. A sample realm configuration file is provided in the `keycloak/data` directory that can be imported to quickly test the integration in this demo.
+
+This application is composed of:
+
+* 2 microservices applications:
+** A `speaker` microservice used to manage the speakers that will talk at the event.
+** A `session` microservice used to manage the session talks held at the event.
+* A small web application designed as an **Angular 16+ SPA** that uses the previous microservices.
+
+WARNING: JWT validation doesn't work correctly in the current Payara Platform release *5.2020.5*. Fixes are expected to come
+for the next release and this project will be updated to clarify it as such.
+
+== Business Domain
+
+Users that access this application should follow into the next 3 groups, each one mapped to multiple roles defined in the Keycloak realm:
+
+`Admin`:: Administrators of the conference event. They can:
++
+. Create new session talks (`can-create-sessions`)
+. View all session talks (`can-see-sessions`)
+. Delete session talks (`can-delete-sessions`)
+. View all registered speakers (`can-see-speakers`)
+. Add new speakers (`can-add-speakers`)
+. Accept speakers into the conference (`accept-speakers`)
+
+
+`Speaker`:: Speakers of talks at the event. They can:
++
+. View registered sessions (`can-see-sessions`)
+. View all fellow speakers (`can-see-speakers`)
+. Register themselves as speakers (`speaker`, `can-add-speakers`)
+
+
+`Attendee`:: Attendees of the event. They can:
++
+. View all speakers registered (`can-see-speakers`)
+. View all session talks (`can-see-sessions`)
+. Attend a session if interested (`can-register-to-sessions`)
+
+The microservices are configured as Maven projects and can be launched from the command line using the Payara Micro Maven plugin like this:
+
+[source, shell]
+----
+mvn clean install
+mvn payara-micro:start
+----

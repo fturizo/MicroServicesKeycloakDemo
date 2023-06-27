@@ -1,0 +1,60 @@
+<div class="h-100 d-flex flex-column">
+  <div class="nav-container">
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+      <div class="container">
+        <div class="navbar-brand micro-logo"></div>
+        <ul ngbNav #nav="ngbNav" class="mr-auto">
+          <li ngbNavItem>
+            <a routerLink="/" ngbNavLink>Home</a>
+          </li>
+          <li ngbNavItem>
+            <a routerLink="/sessions" ngbNavLink *ngIf="isAuthenticated">
+              <i class="fa fa-chalkboard-teacher"></i> Talk Sessions
+            </a>
+          </li>
+          <li ngbNavItem>
+            <a routerLink="/speakers" ngbNavLink *ngIf="isAuthenticated">
+              <i class="fa fa-user-tie"></i> Speakers
+            </a>
+          </li>
+        </ul>
+        <ul class="navbar-nav d-none d-md-block">
+          <li class="nav-item" *ngIf="!isAuthenticated">
+            <button class="btn btn-primary btn-margin" (click)="login()">
+              Log in
+            </button>
+          </li>
+
+          <li class="nav-item dropdown" *ngIf="isAuthenticated">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button">
+              <img alt="Profile picture" class="nav-user-profile profile-image rounded-circle img-thumbnail" width="50"
+                   src="assets/images/profile-picture.png"/>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="dropdown-header nav-user-name user-name"></li>
+              <li>
+                <a routerLink="/profile" class="dropdown-item dropdown-profile route-link">
+                  <i class="fas fa-user mr-3"></i> Profile
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" (click)="logout()">
+                  <i class="fas fa-power-off mr-3"></i> Log out
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container mt-5 flex-grow-1">
+      <app-messages></app-messages>
+      <router-outlet></router-outlet>
+    </div>
+    <footer class="bg-light text-center p-5">
+      <p>
+        Powered by <a href="https://www.keycloak.org/">Keycloak</a>
+      </p>
+    </footer>
+  </div>
+</div>

@@ -1,0 +1,83 @@
+<div class="container">
+  <p>
+    <a class="btn btn-primary" (click)="openCreateSession(sessionDialog)">
+      Add New Session <i class="fa fa-plus-circle"></i>
+    </a>
+  </p>
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Venue</th>
+      <th scope="col">Date</th>
+      <th scope="col">Duration</th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let session of sessions">
+      <th scope="row">{{session.id}}</th>
+      <td>
+        {{session.title}}
+        <span *ngIf="checkRegisteredSession(session)" class="badge text-bg-success">
+            I'm attending! <i class="fa fa-check-circle"></i>
+        </span>
+      </td>
+      <td>{{session.venue}}</td>
+      <td>{{session.date | date}}</td>
+      <td>{{session.duration}}</td>
+      <td>
+        <div class="btn-group" role="group">
+          <button (click)="attendSession(session)" [disabled]="checkRegisteredSession(session)" class="btn btn-primary"
+                  ngbTooltip="Attend">
+            <i class="fa fa-calendar-plus"></i>
+          </button>
+          <button (click)="deleteSession(session)" class="btn btn-danger"
+                  ngbTooltip="Delete">
+            <i class="fa fa-minus-circle"></i>
+          </button>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<ng-template #sessionDialog let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Add New Session</h5>
+    <button aria-label="Close" class="btn-close" type="button" (click)="currentModal.dismiss()"></button>
+  </div>
+  <form [formGroup]="createForm" (submit)="createSession(createForm.value)">
+    <div class="modal-body">
+      <div class="form-group">
+        <label for="sessionTitle">Title</label>
+        <input class="form-control" id="sessionTitle" placeholder="Enter title" type="text" formControlName="title">
+      </div>
+      <div class="form-group">
+        <label for="sessionVenue">Venue</label>
+        <input class="form-control" id="sessionVenue" placeholder="Enter Venue" type="text" formControlName="venue">
+      </div>
+      <div class="form-group">
+        <label for="sessionDate">Date</label>
+        <div class="input-group">
+          <input class="form-control" id="sessionDate" placeholder="yyyy-mm-dd" formControlName="date"
+                 ngbDatepicker #sDate="ngbDatepicker">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" (click)="sDate.toggle()" type="button">
+              <i class="fa fa-calendar"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="sessionDuration">Duration</label>
+        <input class="form-control" id="sessionDuration" placeholder="PT" type="text" formControlName="duration">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" type="button" (click)="currentModal.dismiss()">Close</button>
+      <button class="btn btn-primary" type="submit">Save</button>
+    </div>
+  </form>
+</ng-template>

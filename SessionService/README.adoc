@@ -1,0 +1,23 @@
+== Session Microservice Application
+
+Sample microservice provisioned using Eclipse MicroProfile 6.0 and Jakarta EE 10 that manages sessions and attendance for a conference event.
+
+Operations of this service include:
+
+. Create new sessions
+. List all existing sessions
+. List all sessions in a specific date
+. Get the data from a session from its ID
+. Delete existing sessions
+. Allow a user to register to an existing session
+. View all current registrations for any user
+
+== Configuration
+
+In order to correctly configure this service to verify signed tokens sent by clients, the following MicroProfile Configuration properties need to be correctly defined:
+
+[source, properties]
+----
+mp.jwt.verify.publickey.location=http://<keycloak-url>/realms/<realm-name>/protocol/openid-connect/certs
+mp.jwt.verify.issuer=http://<keycloak-url>/realms/<realm-name>
+----

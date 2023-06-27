@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row align-items-center profile-header">
+    <div class="col-md-2">
+      <img alt="User's profile picture" class="rounded-circle img-fluid img-thumbnail mx-auto"
+           src="assets/images/profile-picture-128.png"/>
+    </div>
+    <div class="col-md">
+      <h2 class="user-name">{{name}}</h2>
+      <p class="lead text-muted user-email">{{email}}</p>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col-lg">
+      <h3>ID Token:</h3>
+      <pre>
+        <code [highlight]="idToken" [lineNumbers]="true"></code>
+      </pre>
+    </div>
+  </div>
+</div>

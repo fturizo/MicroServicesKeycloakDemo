@@ -1,0 +1,21 @@
+== Speaker Microservice Application
+
+Sample microservice provisioned using Eclipse MicroProfile 6.0 and Jakarta EE 10 that manages speakers for a conference event.
+
+Operations of this service include:
+
+. Register new speakers
+. List all existing speakers
+. Get the data of an existing speaker from its ID
+. Accept speakers to the conference
+. Verify if speakers are already registered in the platform
+
+== Configuration
+
+In order to correctly configure this service to verify signed tokens sent by clients, the following MicroProfile Configuration properties need to be correctly defined:
+
+[source, properties]
+----
+mp.jwt.verify.publickey.location=http://<keycloak-url>/realms/<realm-name>/protocol/openid-connect/certs
+mp.jwt.verify.issuer=http://<keycloak-url>/realms/<realm-name>
+----
