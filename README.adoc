@@ -13,8 +13,14 @@ This application is composed of:
 ** A `session` microservice used to manage the session talks held at the event.
 * A small web application designed as an **Angular 16+ SPA** that uses the previous microservices.
 
-WARNING: JWT validation doesn't work correctly in the current Payara Platform release *5.2020.5*. Fixes are expected to come
-for the next release and this project will be updated to clarify it as such.
+== Keycloak Setup
+
+To run these applications you can easily start a Docker container to setup `Keycloak` and import the configuration file mentioned above:
+
+[source, shell]
+----
+> docker -p 8888:8080 run -v ./keycloak/data:/opt/keycloak/data/import:ro quay.io/keycloak/keycloak:21.1.1 start-dev --import-realm
+----
 
 == Business Domain
 

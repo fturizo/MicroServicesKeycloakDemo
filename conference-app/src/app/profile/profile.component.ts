@@ -10,6 +10,7 @@ export class ProfileComponent implements OnInit {
   name: string;
   email: string;
   idToken: string;
+  accessToken: string;
   constructor(public authService: KeycloakService) { }
 
   async ngOnInit(): Promise<void> {
@@ -17,5 +18,6 @@ export class ProfileComponent implements OnInit {
     this.name = `${profile.firstName} ${profile.lastName}`;
     this.email = profile.email;
     this.idToken = JSON.stringify(profile, null, '  ');
+    this.accessToken = await this.authService.getToken();
   }
 }

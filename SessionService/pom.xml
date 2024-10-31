@@ -38,17 +38,17 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.10.1</version>
+                <version>3.11.0</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>3.3.2</version>
+                <version>3.4.0</version>
             </plugin>
             <plugin>
                 <groupId>fish.payara.maven.plugins</groupId>
                 <artifactId>payara-micro-maven-plugin</artifactId>
-                <version>1.4.0</version>
+                <version>2.3</version>
                 <configuration>
                     <payaraVersion>${payara.version}</payaraVersion>
                     <deployWar>true</deployWar>
@@ -71,7 +71,7 @@
                             <key>--noCluster</key>
                         </option>
                     </commandLineOptions>
-                    <contextRoot>"/"</contextRoot>
+                    <contextRoot>/</contextRoot>
                 </configuration>
             </plugin>
         </plugins>

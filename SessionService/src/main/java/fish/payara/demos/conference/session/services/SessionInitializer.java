@@ -5,8 +5,8 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.util.logging.Logger;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.context.Initialized;
 import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.event.Startup;
 import jakarta.inject.Inject;
 
 /**
@@ -16,11 +16,11 @@ import jakarta.inject.Inject;
 public class SessionInitializer {
 
     private static final Logger LOG = Logger.getLogger(SessionInitializer.class.getName());
-    
+
     @Inject
     SessionService sessionService;
-    
-    public void initialize(@Observes @Initialized(ApplicationScoped.class) Object event){
+
+    public void initialize(@Observes Startup event){
         LOG.info("Initializing sessions");
         if(sessionService.retrieveSessions().isEmpty()){
             sessionService.addNewSession(new Session("Fun with Kubernetes and Payara Micro", "Ocarina", LocalDate.now(), Duration.ofMinutes(120)));
