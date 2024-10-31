@@ -19,7 +19,7 @@ To run these applications you can easily start a Docker container to setup `Keyc
 
 [source, shell]
 ----
-> docker -p 8888:8080 run -v ./keycloak/data:/opt/keycloak/data/import:ro quay.io/keycloak/keycloak:21.1.1 start-dev --import-realm
+> docker run -p 8888:8080 -v ./keycloak/data:/opt/keycloak/data/import:ro quay.io/keycloak/keycloak:21.1.1 start-dev --import-realm
 ----
 
 == Business Domain
